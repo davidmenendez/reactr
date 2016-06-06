@@ -1,1 +1,4 @@
 /node_modules
+/public/scripts
+/public/styles
+.DS_Store

@@ -15,7 +15,7 @@ gulp.task('build', function () {
   .pipe(source('bundle.js'))
   .pipe(buffer())
   .pipe(uglify())
-  .pipe(gulp.dest('public'));
+  .pipe(gulp.dest('./public/scripts/'));
 });
 
 gulp.task('styles', function(){
@@ -27,5 +27,5 @@ gulp.task('styles', function(){
     browsers: ['last 2 versions'],
     cascade: false
   }))
-  .pipe(gulp.dest('./public'));
+  .pipe(gulp.dest('./public/styles/'));
 });
