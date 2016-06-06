@@ -1,5 +1,15 @@
 *{
   margin: 0;
   padding: 0;
-  border-sizing: border-box;
+  box-sizing: border-box;
 }
+body{
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@import "typography";
+@import "structure";
