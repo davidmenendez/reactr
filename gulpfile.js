@@ -18,7 +18,7 @@ gulp.task('build', function () {
   .pipe(gulp.dest('./public/scripts/'));
 });
 
-gulp.task('styles', function(){
+gulp.task('styles', function() {
   gulp.src('src/sass/**/*.scss')
   .pipe(sass(
     {outputStyle: 'expanded'}
@@ -28,4 +28,34 @@ gulp.task('styles', function(){
     cascade: false
   }))
   .pipe(gulp.dest('./public/styles/'));
+});
+
+gulp.task('watch', ['styles'], function() {
+  gulp.watch('src/sass/**/*.scss', ['styles']);
+
+  var bundler = watchify(browserify({
+    entries: './src/components/index.jsx', 
+    extensions: ['.jsx'], 
+    debug: true,
+    cache: {},
+    packageCache: {}
+  }).transform('babelify', {presets: ['es2015', 'react']}));
+
+  function rebundle() {
+    bundler.bundle()
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('public/scripts/'))
+    .on('end', function(){
+      console.log('bundle complete');
+    });
+  }
+
+  bundler.on('update', function() {
+    console.log('-> bundling...');
+    rebundle();
+  });
+
+  rebundle();
 });
