@@ -4,10 +4,6 @@ var path = require('path');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req, res) {
-  res.send('moop');
-});
-
 app.listen('8000', function() {
   console.log('running on 8000');
 });
