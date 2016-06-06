@@ -1,4 +1,4 @@
 /node_modules
-/public/scripts
-/public/styles
+/public/scripts/bundle.js
+/public/styles/styles.css
 .DS_Store
