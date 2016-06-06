@@ -9,7 +9,7 @@ var buffer = require('vinyl-buffer');
 var watchify = require('watchify');
 
 gulp.task('build', function () {
-  browserify({entries: './src/components/index.jsx', extensions: ['.jsx'], debug: true})
+  browserify({entries: './src/components/app.jsx', extensions: ['.jsx'], debug: true})
   .transform('babelify', {presets: ['es2015', 'react']})
   .bundle()
   .pipe(source('bundle.js'))
@@ -34,7 +34,7 @@ gulp.task('watch', ['styles'], function() {
   gulp.watch('src/sass/**/*.scss', ['styles']);
 
   var bundler = watchify(browserify({
-    entries: './src/components/index.jsx', 
+    entries: './src/components/app.jsx', 
     extensions: ['.jsx'], 
     debug: true,
     cache: {},
@@ -43,6 +43,10 @@ gulp.task('watch', ['styles'], function() {
 
   function rebundle() {
     bundler.bundle()
+    .on('error', function(err) {
+      console.log(err.toString());
+      this.emit('end');
+    })
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(uglify())
