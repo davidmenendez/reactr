@@ -1,4 +1,5 @@
 import React from 'react';
+import ApiRequest from '../lib/request';
 
 class Form extends React.Component {
   constructor(props) {
@@ -7,10 +8,21 @@ class Form extends React.Component {
       hashtag: '',
       username: '',
       tweet: '',
-      data: this.props.data
+      data: []
     }
     this.inputHandler = this.inputHandler.bind(this);
     this.formHandler = this.formHandler.bind(this);
+    this.loadTweets = this.loadTweets.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadTweets();
+  }
+
+  loadTweets() {
+    ApiRequest((data) => {
+      this.setState({data: data});
+    });
   }
 
   inputHandler(e) {
