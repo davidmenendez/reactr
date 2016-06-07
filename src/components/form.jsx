@@ -32,6 +32,7 @@ class Form extends React.Component {
 
   formHandler(e) {
     e.preventDefault();
+    if(!this.state.username || !this.state.tweet) return
     let tweet = {
       username: this.state.username,
       tweet: this.state.tweet
@@ -45,27 +46,31 @@ class Form extends React.Component {
 
   render() {
     let tweets = this.state.data.map((tweet, id) => {
-      return <div key={id}>
-        {tweet.username} - {tweet.tweet}
-      </div>
+      return <li key={id}>{tweet.username} - {tweet.tweet}</li>
     });
     return <div className="container">
       <form>
-        <label for="hashtag">Enter Hashtag</label>
-        <input id="hashtag"
-          type="text"
-          placeholder="hashtag"
-          onChange={this.inputHandler}
-          value={this.state.hashtag} />
+        <div className="input">
+          <label for="hashtag">Enter Hashtag</label>
+          <input id="hashtag"
+            type="text"
+            placeholder="hashtag"
+            onChange={this.inputHandler}
+            value={this.state.hashtag} />
+          </div>
       </form>
       <form onSubmit={this.formHandler}>
         <h2>Add Tweet</h2>
-        <input id="username" type="text" placeholder="username" onChange={this.inputHandler} value={this.state.username} />
-        <input id="tweet" type="text" placeholder="tweet" onChange={this.inputHandler} value={this.state.tweet} />
-        <button type="submit">tweet</button>
+        <div className="input">
+          <input id="username" type="text" placeholder="username" onChange={this.inputHandler} value={this.state.username} />
+          <input id="tweet" type="text" placeholder="tweet" onChange={this.inputHandler} value={this.state.tweet} />
+          <button type="submit">tweet</button>
+        </div>
       </form>
       <h2>tweets</h2>
-      {tweets}
+      <ul>
+        {tweets}
+      </ul>
     </div>
   }
 }
