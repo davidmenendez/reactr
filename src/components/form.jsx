@@ -21,7 +21,8 @@ class Form extends React.Component {
 
   loadTweets() {
     ApiRequest((data) => {
-      this.setState({data: data});
+      console.log(data.statuses);
+      this.setState({data: data.statuses});
     });
   }
 
@@ -34,8 +35,10 @@ class Form extends React.Component {
     e.preventDefault();
     if(!this.state.username || !this.state.tweet) return
     let tweet = {
-      username: this.state.username,
-      tweet: this.state.tweet
+      user: {
+        screen_name: this.state.username
+      },
+      text: this.state.tweet
     };
     this.setState({
       data: this.state.data.concat(tweet)
@@ -45,9 +48,6 @@ class Form extends React.Component {
   }
 
   render() {
-    let tweets = this.state.data.map((tweet, id) => {
-      return <li key={id}>{tweet.username} - {tweet.tweet}</li>
-    });
     return <div className="container">
       <form>
         <div className="input">
@@ -69,7 +69,14 @@ class Form extends React.Component {
       </form>
       <h2>tweets</h2>
       <ul>
-        {tweets}
+        {
+          this.state.data.map((tweet, id) => {
+            return <li key={id} className="tweet">
+              <img src={tweet.user.profile_image_url} />
+              <p>{tweet.user.screen_name} - {tweet.text}</p>
+            </li>
+          })
+        }
       </ul>
     </div>
   }
