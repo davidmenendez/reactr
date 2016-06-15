@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var watchify = require('watchify');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('build', function () {
   browserify({entries: './src/components/app.jsx', extensions: ['.jsx'], debug: true})
@@ -49,7 +50,9 @@ gulp.task('watch', ['styles'], function() {
     })
     .pipe(source('bundle.js'))
     .pipe(buffer())
+    .pipe(sourcemaps.init())
     .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/scripts/'))
     .on('end', function(){
       console.log('bundle complete');
