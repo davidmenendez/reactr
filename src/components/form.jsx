@@ -1,84 +1,78 @@
 import React from 'react';
 import ApiRequest from '../lib/request';
+import Button from './button.jsx';
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hashtag: '',
-      username: '',
-      tweet: '',
-      data: []
-    }
-    this.inputHandler = this.inputHandler.bind(this);
-    this.formHandler = this.formHandler.bind(this);
-    this.loadTweets = this.loadTweets.bind(this);
+      data: [],
+      cursor: -1,
+      page: 0
+    };
+    this.loadFollowers = this.loadFollowers.bind(this);
+    this.getToken = this.getToken.bind(this);
   }
 
   componentDidMount() {
-    this.loadTweets();
+    this.loadFollowers();
   }
 
-  loadTweets() {
-    ApiRequest((data) => {
-      console.log(data.statuses);
-      this.setState({data: data.statuses});
+  getToken() {
+    ApiRequest('access-token' + location.search, 'GET', {}, (data) => {
+      console.log(data);
     });
   }
 
-  inputHandler(e) {
-    e.preventDefault();
-    this.setState({[e.target.id]: e.target.value});
+  loadFollowers() {
+    var opts = {
+      cursor: this.state.cursor
+    };
+    ApiRequest('followers/', 'GET', opts, (data) => {
+      this.setState({
+        data: data.users,
+        cursor: data.next_cursor,
+        page: this.state.page + 1
+      });
+    });
   }
 
-  formHandler(e) {
-    e.preventDefault();
-    if(!this.state.username || !this.state.tweet) return
-    let tweet = {
-      user: {
-        screen_name: this.state.username
-      },
-      text: this.state.tweet
-    };
-    this.setState({
-      data: this.state.data.concat(tweet)
-    }, function() {
-      this.setState({ tweet: '', username: '' })
+  destroy(id) {
+    ApiRequest('friendships/destroy/' + id, 'POST', {}, (data) => {
+      //console.log(data);
     });
   }
 
   render() {
-    return <div className="container">
-      <form>
-        <div className="input">
-          <label for="hashtag">Enter Hashtag</label>
-          <input id="hashtag"
-            type="text"
-            placeholder="hashtag"
-            onChange={this.inputHandler}
-            value={this.state.hashtag} />
-          </div>
-      </form>
-      <form onSubmit={this.formHandler}>
-        <h2>Add Tweet</h2>
-        <div className="input">
-          <input id="username" type="text" placeholder="username" onChange={this.inputHandler} value={this.state.username} />
-          <input id="tweet" type="text" placeholder="tweet" onChange={this.inputHandler} value={this.state.tweet} />
-          <button type="submit">tweet</button>
+    let followers = this.state.data.map( (follower, id) => {
+      const loc = follower.location.toLowerCase();
+      if (
+        loc.indexOf('austin') < 0 && 
+        loc.indexOf('atx') < 0 && 
+        loc.indexOf('tx') < 0 && 
+        loc.indexOf('texas') < 0 &&
+        loc.length > 0)
+        return (
+          <li key={follower.id}>
+            <a href={"http://twitter.com/" + follower.screen_name} target="_blank">#{id} - {follower.screen_name} - {follower.location}</a>
+            <Button className="button" onClick={() => {this.destroy(follower.id)}} text="unfollow" />
+          </li>
+        )
+    });
+    return (
+      <div>
+        <h2>followers</h2>
+        <h3>page #{this.state.page}</h3>
+        <div className="button-group">
+          <a className="button" href="/token">login</a>
+          <button className="button" onClick={this.getToken}>get token</button>
+          <button className="button" onClick={this.loadFollowers}>next page</button>
         </div>
-      </form>
-      <h2>tweets</h2>
-      <ul>
-        {
-          this.state.data.map((tweet, id) => {
-            return <li key={id} className="tweet">
-              <img src={tweet.user.profile_image_url} />
-              <p>{tweet.user.screen_name} - {tweet.text}</p>
-            </li>
-          })
-        }
-      </ul>
-    </div>
+        <ul>
+          {followers}
+        </ul>
+      </div>
+    )
   }
 }
 

@@ -1,22 +1,46 @@
-button, input, select, textarea{
-  line-height: inherit;
-  color: inherit;
+button {
   font: inherit;
-  padding: .4rem 1rem;
-  border: 1px solid #ededed;
+  line-height: inherit;
   outline: 0;
-}
-
-.input{
-  margin-bottom: 1rem;
-}
-
-button{
   cursor: pointer;
-  background: #5BE365;
-  color: #fff;
-  border-color: #60F06B;
-  &:hover{
-    background: #60F06B;
+}
+
+.button-group {
+  margin-bottom: 1rem;
+  .button {
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.button {
+  padding: .5rem 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 1rem;
+  transition: $transition;
+  &--primary {
+    border: 1px solid $blue;
+    background: $blue;
+    color: #333;
+    &:hover {
+      background: $blue--hover;
+    }
+  }
+  &--secondary {
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #333;
+    &:hover {
+      color: #333;
+      background: #eee;
+    }
+  }
+  &:disabled {
+    color: #777;
+    border: 1px solid #bbb;
+    background: #bbb;
+    cursor: default;
   }
 }

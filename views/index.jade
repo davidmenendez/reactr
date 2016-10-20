@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title REACTR
+    link(href="https://fonts.googleapis.com/css?family=Roboto:400,300,700", rel="stylesheet", type="text/css")
+    link(rel="stylesheet", type="text/css", href="styles/styles.css")
+  body
+    nav
+      .container
+        h1.tiny REACTR
+        if user && user.name
+          p 
+            a(href="http://twitter.com/"+user.screen_name target="_blank") #{user.name}
+        else
+          .button-group
+            a(class="button button--secondary" href="/token") login
+    section.banner
+      .container
+        .banner-text
+          h1.jumbo REACTR
+          h2 The twitter tool
+        .button-group
+            a(class="button button--secondary" href="#") action click
+            a(class="button button--secondary" href="#") fake button
+    section
+      .container
+        #app
+    script(src="scripts/bundle.js")
