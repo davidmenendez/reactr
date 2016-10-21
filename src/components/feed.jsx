@@ -19,14 +19,12 @@ class Feed extends React.Component {
   }
 
   destroy(id) {
-    ApiRequest('friendships/destroy/' + id, 'POST', {});
+    ApiRequest(`friendships/destroy/${id}`, 'post');
   }
 
   loadFollowers() {
-    var opts = {
-      cursor: this.state.cursor
-    };
-    ApiRequest('followers/', 'GET', opts, (data) => {
+    const cursor = this.state.cursor;
+    ApiRequest(`followers/${cursor}`, 'get', (data) => {
       this.setState({
         data: data.users,
         cursor: data.next_cursor,

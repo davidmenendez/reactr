@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4;
+  position: relative;
+  min-height: 100vh;
+}
+section {
+  padding: 3rem 0;
+}
+ul {
+  list-style: none;
+}
+li {
+  clear: both;
+}
+nav {
+  background: #333;
+  color: #fff;
+  padding: 1rem 0;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    * {
+      margin-bottom: 0;
+    }
+  }
+}
+button {
+  font: inherit;
+  line-height: inherit;
+  outline: 0;
+  cursor: pointer;
+}

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "test": "FAKERESULTS=TRUE node server.js",
     "watch": "gulp watch"
   },
   "author": "",

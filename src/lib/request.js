@@ -1,12 +1,12 @@
-export default function ApiRequest(api, action, params, callback) {
+export default function ApiRequest(path, action, callback) {
   var loader = document.querySelector('.loader');
   loader.classList.add('loader--active');
-  let req = new XMLHttpRequest();
-  let url = '/api/' + api;
-  if (params.cursor)
-    url += params.cursor;
 
-  req.open(action, url, true);
+  let req = new XMLHttpRequest();
+  let fullPath = '/api/' + path;
+  action = action.toUpperCase();
+
+  req.open(action, fullPath, true);
 
   if(action == 'POST')
     req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
@@ -21,5 +21,5 @@ export default function ApiRequest(api, action, params, callback) {
     }
   };
 
-  req.send(JSON.stringify(params));
+  req.send();
 }

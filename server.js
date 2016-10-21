@@ -6,7 +6,7 @@ var twitterApi = require('node-twitter-api');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
 var fakeResults = require('./fake_results.json');
-var useFakeResults = true;
+var useFakeResults = process.env.FAKERESULTS ? true : false;
 
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'jade');
