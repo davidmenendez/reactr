@@ -10,8 +10,6 @@
 .button {
   padding: .5rem 1rem;
   display: inline-block;
-  vertical-align: middle;
-  margin-left: 1rem;
   transition: $transition;
   &--primary {
     border: 1px solid $blue;
@@ -28,6 +26,13 @@
     &:hover {
       color: #333;
       background: #eee;
+    }
+  }
+  &--attention {
+    background: $red;
+    border: 1px solid $red;
+    &:hover {
+      background: $red--hover;
     }
   }
   &:disabled {

@@ -1,0 +1,15 @@
+select, input {
+  font: inherit;
+  line-height: 1.4;
+  padding: .5rem 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+select {
+  appearance: none;
+  border-radius: 0;
+}

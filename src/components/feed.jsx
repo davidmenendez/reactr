@@ -8,10 +8,19 @@ class Feed extends React.Component {
     this.state = {
       data: [],
       cursor: -1,
-      page: 0
+      page: 0,
+      filters: [],
+      currentFilter: '',
+      filterCategory: 'location'
     };
     this.loadFollowers = this.loadFollowers.bind(this);
     this.filterFollowers = this.filterFollowers.bind(this);
+    this.updateCurrentFilter = this.updateCurrentFilter.bind(this);
+    this.addFilter = this.addFilter.bind(this);
+    this.removeFilter = this.removeFilter.bind(this);
+    this.removeAllFilters = this.removeAllFilters.bind(this);
+    this.getCategories = this.getCategories.bind(this);
+    this.setFilterCategory = this.setFilterCategory.bind(this);
   }
 
   componentDidMount() {
@@ -33,10 +42,34 @@ class Feed extends React.Component {
     });
   }
 
+  addFilter() {
+    this.setState({ 
+      filters: this.state.filters.concat(this.state.currentFilter),
+      currentFilter: ''
+    });
+  }
+
+  updateCurrentFilter(e) {
+    this.setState({ currentFilter: e.target.value });
+  }
+
+  removeFilter(e) {
+    const filters = this.state.filters.slice();
+    filters.splice(filters.indexOf(e.target.textContent), 1);
+    this.setState({ filters: filters });
+  }
+
+  removeAllFilters() {
+    this.setState({ filters: [] });
+  }
+
   filterFollowers(data) {
     return data.filter((follower, id) => {
-      const loc = follower.location.toLowerCase();
-      return loc.indexOf('atx') < 0 && loc.indexOf('austin') < 0 && loc.indexOf('tx') < 0 && loc.indexOf('texas') < 0
+      const followerFilter = String(follower[this.state.filterCategory]).toLowerCase();
+      const results = this.state.filters.map((filter, id) => {
+        return followerFilter.indexOf(filter) < 0
+      });
+      return results.indexOf(false) < 0
     }).map((follower, id) => {
         return (
           <li key={follower.id_str}>
@@ -50,11 +83,47 @@ class Feed extends React.Component {
     });
   }
 
+  getCategories() {
+    if (this.state.data.length) {
+      const keys = Object.keys(this.state.data[0]).sort();
+      const categories = keys.map((category, id) => {
+        return (
+          <option key={id} value={category}>{category.replace(/_/g, " ")}</option>
+        )
+      });
+      return categories;
+    }
+  }
+
+  setFilterCategory(e) {
+    this.setState({ filterCategory: e.target.value })
+  }
+
   render() {
     const followers = this.state.data ? this.filterFollowers(this.state.data) : null;
+    const activeFilters = this.state.filters.map((filter, id) => {
+      return (
+        <li key={id} onClick={this.removeFilter}>{filter}</li>
+      )
+    });
+    const categories = this.getCategories();
     return (
       <div>
         <h2>Feed</h2>
+        <div className="filters">
+          <h3>Filters</h3>
+          <div className="filter-controls">
+            <select onChange={this.setFilterCategory} defaultValue="location" value={this.state.filterCategory}>
+              {categories}
+            </select>
+            <input type="text" placeholder="filter" onChange={this.updateCurrentFilter} value={this.state.currentFilter}/>
+            <button className="button button--primary" onClick={this.addFilter}>add filter</button>
+            <button className="button button--attention" onClick={this.removeAllFilters}>remove filters</button>
+            <ul className="filters-active">
+              {activeFilters}
+            </ul>
+          </div>
+        </div>
         <div className="button-group">
           <button className="button button--primary" onClick={this.loadFollowers} disabled={this.state.cursor === 0}>next page</button>
         </div>
