@@ -102,6 +102,39 @@ app.post('/api/friendships/destroy/:user_id', function(req, res, next) {
   });
 });
 
+app.post('/api/friendships/create/:user_id', function(req, res, next) {
+  var params = {
+    user_id: req.params.user_id
+  };
+  twitter.friendships('create', params, _accessToken, _accessSecret, function(error, body, response){
+    if (!error) {
+      res.status(200).send(body);
+    }
+    else{
+      console.log('error', error);
+      res.status(500).send(error);
+    }
+  });
+});
+
+app.get('/api/geo/search', function(req, res, next) {
+  params = {
+    q: '',
+    geocode: '30.2672,-97.7431,15mi',
+    result_type: 'recent',
+    count: 100
+  }
+  twitter.search(params, config.access_token_key, config.access_token_secret, function(error, body, response) {
+    if (!error) {
+      res.json(body);
+    }
+    else{
+      console.log('error', error);
+      res.status(500).send(error);
+    }
+  });
+});
+
 app.listen('8000', function() {
   console.log('running on 8000');
 });
