@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './button.jsx';
+import Filter from './filter.jsx';
 import ApiRequest from '../lib/request';
 
 class Feed extends React.Component {
@@ -11,15 +12,13 @@ class Feed extends React.Component {
       page: 0,
       filters: [],
       currentFilter: '',
-      filterCategory: 'location'
     };
     this.loadFollowers = this.loadFollowers.bind(this);
     this.filterFollowers = this.filterFollowers.bind(this);
-    this.updateCurrentFilter = this.updateCurrentFilter.bind(this);
+    this.setCurrentFilter = this.setCurrentFilter.bind(this);
     this.addFilter = this.addFilter.bind(this);
     this.removeFilter = this.removeFilter.bind(this);
     this.removeAllFilters = this.removeAllFilters.bind(this);
-    this.getCategories = this.getCategories.bind(this);
     this.setFilterCategory = this.setFilterCategory.bind(this);
   }
 
@@ -50,7 +49,7 @@ class Feed extends React.Component {
       });
   }
 
-  updateCurrentFilter(e) {
+  setCurrentFilter(e) {
     this.setState({ currentFilter: e.target.value });
   }
 
@@ -84,18 +83,6 @@ class Feed extends React.Component {
     });
   }
 
-  getCategories() {
-    if (this.state.data.length) {
-      const keys = Object.keys(this.state.data[0]).sort();
-      const categories = keys.map((category, id) => {
-        return (
-          <option key={id} value={category}>{category.replace(/_/g, " ")}</option>
-        )
-      });
-      return categories;
-    }
-  }
-
   setFilterCategory(e) {
     this.setState({ filterCategory: e.target.value })
   }
@@ -107,23 +94,21 @@ class Feed extends React.Component {
         <li key={id} onClick={this.removeFilter}>{filter}</li>
       )
     });
-    const categories = this.getCategories();
     return (
       <div>
         <h2>Feed</h2>
         <div className="filters">
           <h3>Filters</h3>
-          <div className="filter-controls">
-            <select onChange={this.setFilterCategory} value={this.state.filterCategory}>
-              {categories}
-            </select>
-            <input type="text" placeholder="filter" onChange={this.updateCurrentFilter} value={this.state.currentFilter}/>
-            <button className="button button--primary" onClick={this.addFilter}>add filter</button>
-            <button className="button button--attention" onClick={this.removeAllFilters}>remove filters</button>
-            <ul className="filters-active">
-              {activeFilters}
-            </ul>
-          </div>
+          <Filter
+          data={this.state.data}
+          filters={this.state.filters}
+          filterCategory={this.state.filterCategory}
+          setFilterCategory={this.setFilterCategory}
+          addFilter={this.addFilter}
+          removeAllFilters={this.removeAllFilters}
+          setCurrentFilter={this.setCurrentFilter}
+          removeFilter={this.removeFilter}
+          currentFilter={this.state.currentFilter} />
         </div>
         <div className="button-group">
           <button className="button button--primary" onClick={this.loadFollowers} disabled={this.state.cursor === 0}>next page</button>
