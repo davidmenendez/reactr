@@ -43,10 +43,11 @@ class Feed extends React.Component {
   }
 
   addFilter() {
-    this.setState({ 
-      filters: this.state.filters.concat(this.state.currentFilter),
-      currentFilter: ''
-    });
+    if (this.state.currentFilter)
+      this.setState({ 
+        filters: this.state.filters.concat(this.state.currentFilter),
+        currentFilter: ''
+      });
   }
 
   updateCurrentFilter(e) {
