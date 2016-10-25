@@ -12,6 +12,7 @@ class Feed extends React.Component {
       page: 0,
       filters: [],
       currentFilter: '',
+      filterCategory: 'location'
     };
     this.loadFollowers = this.loadFollowers.bind(this);
     this.filterFollowers = this.filterFollowers.bind(this);

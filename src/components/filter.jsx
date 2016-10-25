@@ -4,7 +4,7 @@ class Filter extends React.Component {
   constructor(state) {
     super(state);
     this.state = {
-      filterCategory: 'location'
+      
     };
     this.getCategories = this.getCategories.bind(this);
   }
