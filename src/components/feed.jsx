@@ -111,9 +111,9 @@ class Feed extends React.Component {
           removeFilter={this.removeFilter}
           currentFilter={this.state.currentFilter} />
         </div>
-        <div className="button-group">
+        <p>
           <button className="button button--primary" onClick={this.loadFollowers} disabled={this.state.cursor === 0}>next page</button>
-        </div>
+        </p>
         <h3>Page #{this.state.page}</h3>
         <ul className="feed">
           {followers && followers.length ? followers : <p>no results :(</p>}
