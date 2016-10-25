@@ -1,4 +1,4 @@
 /node_modules
 .DS_Store
 npm-debug.log
-.creds.shcreds.sh
+.creds.sh
