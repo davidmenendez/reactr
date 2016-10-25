@@ -114,7 +114,7 @@ class Feed extends React.Component {
         <div className="filters">
           <h3>Filters</h3>
           <div className="filter-controls">
-            <select onChange={this.setFilterCategory} defaultValue="location" value={this.state.filterCategory}>
+            <select onChange={this.setFilterCategory} value={this.state.filterCategory}>
               {categories}
             </select>
             <input type="text" placeholder="filter" onChange={this.updateCurrentFilter} value={this.state.currentFilter}/>

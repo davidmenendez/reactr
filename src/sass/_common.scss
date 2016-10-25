@@ -11,18 +11,18 @@
   padding: .5rem 1rem;
   display: inline-block;
   transition: $transition;
+  color: #333;
   &--primary {
     border: 1px solid $blue;
     background: $blue;
-    color: #333;
     &:hover {
+      color: #333;
       background: $blue--hover;
     }
   }
   &--secondary {
     border: 1px solid #ccc;
     background: #fff;
-    color: #333;
     &:hover {
       color: #333;
       background: #eee;
@@ -32,6 +32,7 @@
     background: $red;
     border: 1px solid $red;
     &:hover {
+      color: #333;
       background: $red--hover;
     }
   }
