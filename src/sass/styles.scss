@@ -55,9 +55,6 @@ $transition: all 300ms ease;
 .banner {
   background: $blue;
   text-align: center;
-  &-text {
-    margin-bottom: 2rem;
-  }
 }
 
 .filters {
