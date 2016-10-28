@@ -29,7 +29,9 @@ class GeoFeed extends React.Component {
   }
 
   render() {
-    const feed = this.state.statuses.map((status, id) => {
+    const feed = this.state.statuses.filter((status, id) => {
+      return status.user.location.indexOf('Austin') >= 0;
+    }).map((status, id) => {
       return (
         <li key={status.id}>
           <div>
@@ -42,7 +44,7 @@ class GeoFeed extends React.Component {
     });
     return (
       <div>
-        <h2>GEO FEED</h2>
+        <h2>GEOFEED</h2>
         <ul className="feed">{feed}</ul>
       </div>
     )

@@ -11,6 +11,8 @@ body {
   line-height: 1.4;
   position: relative;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 section {
   padding: 3rem 0;

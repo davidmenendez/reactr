@@ -1,13 +1,15 @@
 var express = require('express');
 var session = require('express-session');
-var app = express();
 var path = require('path');
 var twitterApi = require('node-twitter-api');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
 var fakeResults = require('./fake_results.json');
+var compression = require('compression');
 var useFakeResults = process.env.FAKERESULTS ? true : false;
+var app = express();
 
+app.use(compression());
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));

@@ -31,8 +31,10 @@ class App extends React.Component {
     }[this.state.activePanel];
     return (
       <div>
-        <button className={"button " + (this.state.activePanel == "geofeed" ? "button--attention" : "button--secondary")} onClick={this.setPanel}>geofeed</button>
-        <button className={"button " + (this.state.activePanel == "feed" ? "button--attention" : "button--secondary")} onClick={this.setPanel}>feed</button>
+        <p>
+          <button className={"button " + (this.state.activePanel == "geofeed" ? "button--attention" : "button--secondary")} onClick={this.setPanel}>geofeed</button>
+          <button className={"button " + (this.state.activePanel == "feed" ? "button--attention" : "button--secondary")} onClick={this.setPanel}>feed</button>
+        </p>
         <Panel />
         <Loader />
       </div>
