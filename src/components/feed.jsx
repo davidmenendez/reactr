@@ -42,7 +42,8 @@ class Feed extends React.Component {
     });
   }
 
-  addFilter() {
+  addFilter(e) {
+    e.preventDefault();
     if (this.state.currentFilter)
       this.setState({ 
         filters: this.state.filters.concat(this.state.currentFilter),
@@ -115,9 +116,13 @@ class Feed extends React.Component {
           <button className="button button--primary" onClick={this.loadFollowers} disabled={this.state.cursor === 0}>next page</button>
         </p>
         <h3>Page #{this.state.page}</h3>
-        <ul className="feed">
-          {followers && followers.length ? followers : <p>no results :(</p>}
-        </ul>
+        {followers && followers.length ? 
+          <ul className="feed">
+            {followers}
+          </ul>
+          :
+          <p>no results :(</p>
+        }
       </div>
     )
   }
