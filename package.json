@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "FAKERESULTS=TRUE node server.js",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "build": "gulp build"
   },
   "author": "",
   "license": "ISC",
