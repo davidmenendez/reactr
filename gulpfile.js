@@ -22,7 +22,7 @@ gulp.task('build', function () {
 gulp.task('styles', function() {
   gulp.src('src/sass/**/*.scss')
   .pipe(sass(
-    {outputStyle: 'expanded'}
+    {outputStyle: 'compressed'}
     ).on('error', sass.logError))
   .pipe(autoprefixer({
     browsers: ['last 2 versions'],
