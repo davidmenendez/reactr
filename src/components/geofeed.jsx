@@ -36,7 +36,7 @@ class GeoFeed extends React.Component {
         <li key={status.id}>
           <div>
             <p><a href={"http://twitter.com/" + status.user.screen_name} target="_blank">#{id + 1} - {status.user.screen_name}</a></p>
-            <p>location - {status.user.location ? status.user.location : 'NA'}</p>
+            <p>Location - {status.user.location ? status.user.location : 'NA'}</p>
           </div>
           <Button className="button button--primary" onClick={() => {this.befriend(status.user.id_str)}} text="follow" />
         </li>
@@ -44,7 +44,7 @@ class GeoFeed extends React.Component {
     });
     return (
       <div className="panel">
-        <h2>GEOFEED</h2>
+        <h2>Geofeed</h2>
         <p>Shows all tweets in a given area</p>
         <ul className="feed">{feed}</ul>
       </div>

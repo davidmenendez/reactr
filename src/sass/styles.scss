@@ -3,6 +3,9 @@ $blue--hover: #42ABD8;
 $red: #F46379;
 $red--hover: #DA596C;
 $transition: all 300ms ease;
+$white: #fff;
+$gray1: #eee;
+$gray2: #ddd;
 
 @mixin breakpoint($breakpoint) {
   @if $breakpoint == "sm" {
@@ -32,14 +35,14 @@ $transition: all 300ms ease;
 
 .feed {
   margin-top: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid $gray2;
   li {
     padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     &:nth-child(odd) {
-      background: #eee;
+      background: $gray1;
     }
     &:nth-child(even) {
       background: #e5e5e5;
@@ -54,8 +57,8 @@ $transition: all 300ms ease;
 
 .filters {
   margin-bottom: 1rem;
-  background: #eee;
-  border: 1px solid #ddd;
+  background: $gray1;
+  border: 1px solid $gray2;
   padding: 1rem;
 }
 
@@ -78,28 +81,44 @@ $transition: all 300ms ease;
 
 .app-content {
   display: flex;
+  flex-direction: column;
+  @include breakpoint(sm) {
+    flex-direction: row;
+  }
 }
 .panel {
   flex: 1;
   padding: 1rem;
 }
 .sidebar {
-  width: 10rem;
-  background: #f3f3f3;
+  background: $gray1;
+  border-bottom: 1px solid $gray2;
+  @include breakpoint(sm) {
+    border-right: 1px solid $gray2;
+    width: 10rem;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    @include breakpoint(sm) {
+      display: block;
+    }
+  }
   li {
+    text-transform: capitalize;
     padding: 1rem;
     transition: $transition;
     cursor: pointer;
-    background: #f3f3f3;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     &:hover {
       background: $red--hover;
-      color: #fff;
+      color: $white;
     }
     &.nav--active {
       background: $red--hover;
-      color: #fff;
+      color: $white;
     }
   }
 }

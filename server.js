@@ -120,6 +120,7 @@ app.post('/api/friendships/create/:user_id', function(req, res, next) {
 });
 
 app.get('/api/geo/search', function(req, res, next) {
+  //todo figureout how to get the geocode
   params = {
     q: '',
     geocode: '30.2672,-97.7431,15mi',
