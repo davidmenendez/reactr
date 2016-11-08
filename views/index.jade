@@ -10,17 +10,16 @@ html(lang="en")
     link(rel="stylesheet", type="text/css", href="styles/styles.css")
   body
     nav
-      .container
+      .nav-wrapper
         h1.tiny REACTR
         if user && user.name
           p 
             a(href="http://twitter.com/"+user.screen_name target="_blank") #{user.name}
         else
           .button-group
-            a(class="button button--secondary" href="/token") login
-    section.app-wrapper
-      .container
-        #app
+            a(href="/token") login
+    .app-wrapper
+      section#app
     footer
       .container
         h3 reactr

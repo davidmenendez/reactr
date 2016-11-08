@@ -15,9 +15,6 @@ body {
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
 }
-section {
-  padding: 3rem 0;
-}
 ul {
   list-style: none;
 }
@@ -28,13 +25,14 @@ nav {
   background: #333;
   color: #fff;
   padding: 1rem 0;
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    * {
-      margin-bottom: 0;
-    }
+}
+.nav-wrapper {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  * {
+    margin-bottom: 0;
   }
 }
 button {

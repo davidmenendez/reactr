@@ -1,8 +1,9 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Feed from './feed';
+import Followers from './followers';
 import Loader from './loader';
 import Geofeed from './geofeed';
+import Sidebar from './sidebar';
 import ApiRequest from '../lib/request';
 
 class App extends React.Component {
@@ -18,23 +19,22 @@ class App extends React.Component {
     
   }
 
-  setPanel(e) {
+  setPanel(panel) {
     this.setState({
-      activePanel: e.target.textContent
+      activePanel: panel
     });
   }
 
   render() {
     const Panel = {
       geofeed: Geofeed,
-      feed: Feed
+      followers: Followers
     }[this.state.activePanel];
     return (
-      <div>
-        <p>
-          <button className={"button " + (this.state.activePanel == "geofeed" ? "button--attention" : "button--secondary")} onClick={this.setPanel}>geofeed</button>
-          <button className={"button " + (this.state.activePanel == "feed" ? "button--attention" : "button--secondary")} onClick={this.setPanel}>feed</button>
-        </p>
+      <div className="app-content">
+        <Sidebar 
+          activePanel={this.state.activePanel}
+          setPanel={this.setPanel} />
         <Panel />
         <Loader />
       </div>

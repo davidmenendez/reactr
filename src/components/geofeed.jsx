@@ -43,8 +43,9 @@ class GeoFeed extends React.Component {
       )
     });
     return (
-      <div>
+      <div className="panel">
         <h2>GEOFEED</h2>
+        <p>Shows all tweets in a given area</p>
         <ul className="feed">{feed}</ul>
       </div>
     )

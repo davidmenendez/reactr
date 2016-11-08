@@ -97,8 +97,9 @@ class Feed extends React.Component {
       )
     });
     return (
-      <div>
-        <h2>Feed</h2>
+      <div className="panel">
+        <h2>Followers</h2>
+        <p>Shows all current followers</p>
         <div className="filters">
           <h3>Filters</h3>
           <Filter

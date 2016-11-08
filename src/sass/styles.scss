@@ -75,3 +75,31 @@ $transition: all 300ms ease;
     }
   }
 }
+
+.app-content {
+  display: flex;
+}
+.panel {
+  flex: 1;
+  padding: 1rem;
+}
+.sidebar {
+  width: 10rem;
+  background: #f3f3f3;
+  li {
+    padding: 1rem;
+    transition: $transition;
+    cursor: pointer;
+    background: #f3f3f3;
+    display: flex;
+    justify-content: space-between;
+    &:hover {
+      background: $red--hover;
+      color: #fff;
+    }
+    &.nav--active {
+      background: $red--hover;
+      color: #fff;
+    }
+  }
+}
