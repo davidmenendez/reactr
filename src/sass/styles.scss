@@ -81,11 +81,21 @@ $gray2: #ddd;
 
 .app-content {
   display: flex;
+  flex: 1;
   flex-direction: column;
   @include breakpoint(sm) {
     flex-direction: row;
   }
 }
+#app {
+  display: flex;
+  flex: 1;
+}
+.app-wrapper {
+  display: flex;
+  flex: 1;
+}
+
 .panel {
   flex: 1;
   padding: 1rem;
