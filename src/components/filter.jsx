@@ -24,7 +24,7 @@ class Filter extends React.Component {
   render() {
     const activeFilters = this.props.filters.map((filter, id) => {
       return (
-        <li key={id} onClick={this.props.removeFilter}>{filter}</li>
+        <li key={id} onClick={this.props.removeFilter} className="filter-label ico-label"><i className="fa fa-times" />{filter}</li>
       )
     });
     const categories = this.getCategories();

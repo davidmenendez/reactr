@@ -3,9 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
+html {
+  font-size: 16px;
   font-family: 'Roboto', sans-serif;
-  color: #333;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  color: $black;
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.4;
@@ -13,7 +17,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  -webkit-font-smoothing: antialiased;
 }
 ul {
   list-style: none;
@@ -22,7 +25,7 @@ li {
   clear: both;
 }
 nav {
-  background: #333;
+  background: $black;
   color: $white;
   padding: 1rem 0;
 }
@@ -43,6 +46,6 @@ button {
 }
 footer {
   padding: 1rem 0;
-  background: #333;
+  background: $black;
   color: $white;
 }

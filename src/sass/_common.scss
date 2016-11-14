@@ -11,12 +11,13 @@
   padding: .5rem 1rem;
   display: inline-block;
   transition: $transition;
-  color: #333;
+  color: $black;
+  box-shadow: 0px 1px 4px #bbb, 0px 1px 4px #bbb;
   &--primary {
     border: 1px solid $blue;
     background: $blue;
     &:hover {
-      color: #333;
+      color: $black;
       background: $blue--hover;
     }
   }
@@ -24,7 +25,7 @@
     border: 1px solid #ccc;
     background: $white;
     &:hover {
-      color: #333;
+      color: $black;
       background: #eee;
     }
   }
@@ -32,7 +33,7 @@
     background: $red;
     border: 1px solid $red;
     &:hover {
-      color: #333;
+      color: $black;
       background: $red--hover;
     }
   }
@@ -41,6 +42,10 @@
     border: 1px solid #bbb;
     background: #bbb;
     cursor: default;
+    box-shadow: none;
+  }
+  &:focus {
+    box-shadow: 0px 3px 10px #aaa, 0px 3px 10px #aaa;
   }
 }
 

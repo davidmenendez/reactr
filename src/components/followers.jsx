@@ -79,7 +79,7 @@ class Feed extends React.Component {
               <p><a href={"http://twitter.com/" + follower.screen_name} target="_blank">#{id + 1} - {follower.screen_name}</a></p>
               <p>location - {follower.location ? follower.location : 'NA'}</p>
             </div>
-            <Button className="button button--primary" onClick={() => {this.destroy(follower.id_str)}} text="unfollow" />
+            <Button className="button button--primary ico-label" onClick={() => {this.destroy(follower.id_str)}} text="unfollow" ico="fa-minus" />
           </li>
         )
     });
