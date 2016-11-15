@@ -18,8 +18,15 @@ html(lang="en")
         else
           .button-group
             a(href="/token") login
-    .app-wrapper
-      section#app
+    if user && user.name
+      .app-wrapper
+        section#app
+    else
+      .login-wrapper
+        h1 REACTR
+        h2 Better Twitter management tools
+        p Must log in to continue
+        a.button.button--primary(href="/token") login
     footer
       .container
         h3 reactr

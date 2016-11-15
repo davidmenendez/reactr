@@ -67,6 +67,11 @@ app.get("/access-token", function(req, res) {
   });
 });
 
+app.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+})
+
 app.get('/api/followers/:cursor', function(req, res, next) {
   var params = {
     screen_name: 'mrbig500',
