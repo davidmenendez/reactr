@@ -17,8 +17,8 @@ class Sidebar extends React.Component {
     return (
       <aside className="sidebar">
         <ul>
-          <li className={this.props.activePanel == "geofeed" ? "nav--active" : ""} onClick={this.setPanel}>geofeed<i className="fa fa-globe" /></li>
-          <li className={this.props.activePanel == "followers" ? "nav--active" : ""} onClick={this.setPanel}>followers<i className="fa fa-users" /></li>
+          <li className={this.props.activePanel == "geofeed" ? "nav--active" : ""} onClick={this.setPanel}>geofeed</li>
+          <li className={this.props.activePanel == "followers" ? "nav--active" : ""} onClick={this.setPanel}>followers</li>
         </ul>
       </aside>
     )

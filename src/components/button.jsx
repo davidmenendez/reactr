@@ -23,7 +23,6 @@ class Button extends React.Component {
         disabled={!this.state.active}
         onClick={this.clickHandler}
         className={this.props.className}>
-        {this.props.ico ? <i className={"fa " + this.props.ico} /> : ""}
         {this.props.text}
       </button>
     )
