@@ -4,7 +4,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     };
     this.setPanel = this.setPanel.bind(this);
   }
@@ -23,8 +23,9 @@ class Sidebar extends React.Component {
         </div>
         <nav className="sidebar-nav">
           <ul>
-            <li className={this.props.activePanel == "geofeed" ? "nav--active" : ""} onClick={this.setPanel}>geofeed</li>
-            <li className={this.props.activePanel == "followers" ? "nav--active" : ""} onClick={this.setPanel}>followers</li>
+            <li className={this.props.activePanel == "geofeed" ? "nav--active" : ""} onClick={this.setPanel}><i className="fa fa-globe" />geofeed</li>
+            <li className={this.props.activePanel == "followers" ? "nav--active" : ""} onClick={this.setPanel}><i className="fa fa-users" />followers</li>
+            <li><a href="/logout"><i className="fa fa-sign-out" />log out</a></li>
           </ul>
         </nav>
       </aside>

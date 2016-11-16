@@ -6,7 +6,7 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title REACTR
     link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", type="text/css")
-    link(href="https://fonts.googleapis.com/css?family=Roboto:300,400,700", rel="stylesheet", type="text/css")
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,400", rel="stylesheet", type="text/css")
     link(rel="stylesheet", type="text/css", href="styles/styles.css")
   body
     if user && user.name
@@ -17,5 +17,5 @@ html(lang="en")
         h1.jumbo REACTR
         h2 Better Twitter management tools
         p Must log in to continue
-        a.button.button--primary(href="/token") login
+        a.button.button--main(href="/token") login
     script(src="scripts/bundle.js")

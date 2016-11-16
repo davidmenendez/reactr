@@ -9,7 +9,7 @@ class Loader extends React.Component {
   render() {
     return (
       <div className="loader">
-        <p className="jumbo">LOADING</p>
+        <div className="spinner" />
       </div>
     )
   }

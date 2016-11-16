@@ -1,13 +1,16 @@
 $blue: #4ABFF2;
 $blue--hover: #42ABD8;
+$blue2: #235A72;
+$blue2--hover: #1B4659;
 $red: #F46379;
 $red--hover: #DA596C;
-$transition: all 300ms ease;
 $white: #fff;
 $gray1: #f9f9f9;
 $gray2: #f1f1f1;
 $gray-border: #e7e7e7;
 $black: #333;
+
+$transition: all 300ms ease;
 
 @mixin breakpoint($breakpoint) {
   @if $breakpoint == "sm" {
@@ -106,6 +109,8 @@ $black: #333;
   align-items: center;
   text-align: center;
   flex-direction: column;
+  background: $blue2;
+  color: $white;
 }
 
 .panel {

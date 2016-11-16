@@ -1,5 +1,5 @@
 .sidebar {
-  background: #227EA5;
+  background: $blue2;
   border-bottom: 1px solid $gray-border;
   color: $white;
   padding: 1rem;
@@ -26,11 +26,14 @@
       display: block;
       width: 100%;
       &:hover {
-        background: $red--hover;
+        background: $blue2--hover;
       }
       &.nav--active {
-        background: $red--hover;
+        background: $blue2--hover;
       }
+    }
+    i {
+      margin-right: 1rem;
     }
   }
   &-profile {
