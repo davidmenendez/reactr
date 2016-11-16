@@ -16,10 +16,17 @@ class Sidebar extends React.Component {
   render() {
     return (
       <aside className="sidebar">
-        <ul>
-          <li className={this.props.activePanel == "geofeed" ? "nav--active" : ""} onClick={this.setPanel}>geofeed</li>
-          <li className={this.props.activePanel == "followers" ? "nav--active" : ""} onClick={this.setPanel}>followers</li>
-        </ul>
+        <h1>REACTR</h1>
+        <div className="sidebar-profile">
+          <img src={this.props.user.profile_image_url} />
+          {this.props.user.name}
+        </div>
+        <nav className="sidebar-nav">
+          <ul>
+            <li className={this.props.activePanel == "geofeed" ? "nav--active" : ""} onClick={this.setPanel}>geofeed</li>
+            <li className={this.props.activePanel == "followers" ? "nav--active" : ""} onClick={this.setPanel}>followers</li>
+          </ul>
+        </nav>
       </aside>
     )
   }

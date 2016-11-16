@@ -9,26 +9,13 @@ html(lang="en")
     link(href="https://fonts.googleapis.com/css?family=Roboto:300,400,700", rel="stylesheet", type="text/css")
     link(rel="stylesheet", type="text/css", href="styles/styles.css")
   body
-    nav
-      .nav-wrapper
-        h1.tiny REACTR
-        if user && user.name
-          p 
-            a(href="http://twitter.com/"+user.screen_name target="_blank") #{user.name}
-        else
-          .button-group
-            a(href="/token") login
     if user && user.name
       .app-wrapper
         section#app
     else
       .login-wrapper
-        h1 REACTR
+        h1.jumbo REACTR
         h2 Better Twitter management tools
         p Must log in to continue
         a.button.button--primary(href="/token") login
-    footer
-      .container
-        h3 reactr
-        small &copy;2016
     script(src="scripts/bundle.js")

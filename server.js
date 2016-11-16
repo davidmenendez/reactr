@@ -70,7 +70,14 @@ app.get("/access-token", function(req, res) {
 app.get('/logout', function(req, res) {
   req.session.destroy();
   res.redirect('/');
-})
+});
+
+app.get('/api/user', function(req, res) {
+  if (req.session.user)
+    res.status(200).send(req.session.user)
+  else
+    res.status(401).send('Unauthorized');
+});
 
 app.get('/api/followers/:cursor', function(req, res, next) {
   var params = {

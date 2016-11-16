@@ -34,6 +34,7 @@ $black: #333;
 @import "typography";
 @import "structure";
 @import "form";
+@import "sidebar";
 
 .feed {
   margin-top: 1rem;
@@ -110,37 +111,7 @@ $black: #333;
 .panel {
   flex: 1;
   padding: 1rem;
-}
-.sidebar {
-  background: $gray1;
-  border-bottom: 1px solid $gray-border;
   @include breakpoint(sm) {
-    border-right: 1px solid $gray-border;
-    width: 10rem;
-  }
-  ul {
-    display: flex;
-    justify-content: space-between;
-    @include breakpoint(sm) {
-      display: block;
-    }
-  }
-  li {
-    text-transform: capitalize;
-    padding: 1rem;
-    transition: $transition;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    &:hover {
-      background: $red--hover;
-      color: $white;
-    }
-    &.nav--active {
-      background: $red--hover;
-      color: $white;
-    }
+    margin-left: 15rem;
   }
 }

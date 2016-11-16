@@ -1,6 +1,9 @@
+let reqCounter = 0;
+
 export default function ApiRequest(path, action, callback) {
   var loader = document.querySelector('.loader');
   loader.classList.add('loader--active');
+  reqCounter++;
 
   let req = new XMLHttpRequest();
   let fullPath = '/api/' + path;
@@ -13,7 +16,9 @@ export default function ApiRequest(path, action, callback) {
 
   req.onload = function() {
     if(req.readyState === 4) {
-      loader.classList.remove('loader--active');
+      reqCounter--;
+      if (reqCounter === 0)
+        loader.classList.remove('loader--active');
       if (req.status !== 200)
         console.error(req.statusText)
       if (callback)

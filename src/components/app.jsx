@@ -10,13 +10,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activePanel: 'geofeed'
+      activePanel: 'geofeed',
+      user: ''
     };
     this.setPanel = this.setPanel.bind(this);
   }
 
   componentDidMount() {
-    
+    ApiRequest('user', 'get', (data) => {
+      this.setState({
+        user: data
+      });
+    });
   }
 
   setPanel(panel) {
@@ -34,6 +39,7 @@ class App extends React.Component {
       <div className="app-content">
         <Sidebar 
           activePanel={this.state.activePanel}
+          user={this.state.user}
           setPanel={this.setPanel} />
         <Panel />
         <Loader />

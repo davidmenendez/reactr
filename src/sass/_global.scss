@@ -24,28 +24,9 @@ ul {
 li {
   clear: both;
 }
-nav {
-  background: $black;
-  color: $white;
-  padding: 1rem 0;
-}
-.nav-wrapper {
-  padding: 0 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  * {
-    margin-bottom: 0;
-  }
-}
 button {
   font: inherit;
   line-height: inherit;
   outline: 0;
   cursor: pointer;
-}
-footer {
-  padding: 1rem 0;
-  background: $black;
-  color: $white;
 }

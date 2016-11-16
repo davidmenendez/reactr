@@ -1,0 +1,43 @@
+.sidebar {
+  background: #227EA5;
+  border-bottom: 1px solid $gray-border;
+  color: $white;
+  padding: 1rem;
+  @include breakpoint(sm) {
+    border-right: 1px solid $gray-border;
+    width: 15rem;
+    height: 100%;
+    position: fixed;
+  }
+  &-nav {
+    margin: 0 -1rem;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      @include breakpoint(sm) {
+        display: block;
+      }
+    }
+    li {
+      text-transform: capitalize;
+      padding: 1rem;
+      transition: $transition;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      &:hover {
+        background: $red--hover;
+      }
+      &.nav--active {
+        background: $red--hover;
+      }
+    }
+  }
+  &-profile {
+    img {
+      border-radius: 50%;
+      padding-right: .5rem;
+      vertical-align: middle;
+    }
+  }
+}
