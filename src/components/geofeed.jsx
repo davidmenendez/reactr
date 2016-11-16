@@ -18,9 +18,7 @@ class GeoFeed extends React.Component {
 
   loadFeed() {
     ApiRequest('geo/search', 'get', (data) => {
-      this.setState({
-        statuses: data.statuses
-      });
+      this.setState({ statuses: data.statuses });
     });
   }
 

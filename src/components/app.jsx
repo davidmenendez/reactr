@@ -18,16 +18,12 @@ class App extends React.Component {
 
   componentDidMount() {
     ApiRequest('user', 'get', (data) => {
-      this.setState({
-        user: data
-      });
+      this.setState({ user: data });
     });
   }
 
   setPanel(panel) {
-    this.setState({
-      activePanel: panel
-    });
+    this.setState({ activePanel: panel });
   }
 
   render() {

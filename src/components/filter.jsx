@@ -3,9 +3,7 @@ import React from 'react';
 class Filter extends React.Component {
   constructor(state) {
     super(state);
-    this.state = {
-      
-    };
+    this.state = {};
     this.getCategories = this.getCategories.bind(this);
   }
 
