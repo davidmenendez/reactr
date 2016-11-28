@@ -9,11 +9,11 @@ class Button extends React.Component {
     this.clickHandler = this.clickHandler.bind(this);
   }
 
-  clickHandler() {
+  clickHandler(e) {
     this.setState({
       active: !this.state.active
     }, () => {
-      this.props.onClick();
+      this.props.onClick(e);
     });
   }
 
@@ -23,7 +23,7 @@ class Button extends React.Component {
         disabled={!this.state.active}
         onClick={this.clickHandler}
         className={this.props.className}>
-        {this.props.text}
+        {this.props.children}
       </button>
     )
   }

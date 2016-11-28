@@ -10,6 +10,8 @@ class GeoFeed extends React.Component {
     };
     this.loadFeed = this.loadFeed.bind(this);
     this.befriend = this.befriend.bind(this);
+    this.followAll = this.followAll.bind(this);
+    this.followTimeout = this.followTimeout.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +28,20 @@ class GeoFeed extends React.Component {
     ApiRequest(`friendships/create/${id}`, 'post');
   }
 
+  followAll(e) {
+    e.preventDefault();
+    let followButtons = document.getElementsByClassName('follow-button');
+    for (let i = 0; i < followButtons.length; i++) {
+      this.followTimeout(followButtons[i], i);
+    }
+  }
+
+  followTimeout(button, i) {
+    setTimeout(() => {
+      button.click();
+    }, i * 1000);
+  }
+
   render() {
     const feed = this.state.statuses.filter((status, id) => {
       return status.user.location.toLowerCase().indexOf('austin') >= 0;
@@ -36,7 +52,7 @@ class GeoFeed extends React.Component {
             <p><a href={"http://twitter.com/" + status.user.screen_name} target="_blank">#{id + 1} - {status.user.screen_name}</a></p>
             <p>Location - {status.user.location ? status.user.location : 'NA'}</p>
           </div>
-          <Button className="button button--primary" onClick={() => {this.befriend(status.user.id_str)}} text="follow" />
+          <Button className="button button--primary follow-button" onClick={() => {this.befriend(status.user.id_str)}}>follow</Button>
         </li>
       )
     });
@@ -44,6 +60,7 @@ class GeoFeed extends React.Component {
       <div className="panel">
         <h2>Geofeed</h2>
         <p>Shows all tweets in a given area</p>
+        <Button className="button button--primary" onClick={this.followAll}>Follow All</Button>
         <ul className="feed">{feed}</ul>
       </div>
     )
