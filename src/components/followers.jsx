@@ -21,6 +21,8 @@ class Feed extends React.Component {
     this.removeFilter = this.removeFilter.bind(this);
     this.removeAllFilters = this.removeAllFilters.bind(this);
     this.setFilterCategory = this.setFilterCategory.bind(this);
+    this.unfollowAll = this.unfollowAll.bind(this);
+    this.unfollowTimeout = this.unfollowTimeout.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +67,20 @@ class Feed extends React.Component {
     this.setState({ filters: [] });
   }
 
+  unfollowAll(e) {
+    e.preventDefault();
+    let followButtons = document.getElementsByClassName('follow-button');
+    for (let i = 0; i < followButtons.length; i++) {
+      this.unfollowTimeout(followButtons[i], i);
+    }
+  }
+
+  unfollowTimeout(button, i) {
+    setTimeout(() => {
+      button.click();
+    }, i * 1000);
+  }
+
   filterFollowers(data) {
     return data.filter((follower, id) => {
       const followerFilter = String(follower[this.state.filterCategory]).toLowerCase();
@@ -79,7 +95,7 @@ class Feed extends React.Component {
               <p><a href={"http://twitter.com/" + follower.screen_name} target="_blank">#{id + 1} - {follower.screen_name}</a></p>
               <p>location - {follower.location ? follower.location : 'NA'}</p>
             </div>
-            <Button className="button button--primary" onClick={() => {this.destroy(follower.id_str)}} text="unfollow" />
+            <Button className="button button--primary follow-button" onClick={() => {this.destroy(follower.id_str)}}>unfollow</Button>
           </li>
         )
     });
@@ -113,9 +129,10 @@ class Feed extends React.Component {
           removeFilter={this.removeFilter}
           currentFilter={this.state.currentFilter} />
         </div>
-        <p>
+        <div className="button-group">
+          <button className="button button--primary" onClick={this.unfollowAll}>UnFollow All</button>
           <button className="button button--primary" onClick={this.loadFollowers} disabled={this.state.cursor === 0}>next page</button>
-        </p>
+        </div>
         <h3>Page #{this.state.page}</h3>
         {followers && followers.length ? 
           <ul className="feed">

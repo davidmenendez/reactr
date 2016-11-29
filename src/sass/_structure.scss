@@ -3,3 +3,16 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+.flex-row {
+  display: flex;
+  margin: 0 -1rem;
+  flex-direction: column;
+  @include breakpoint(sm) {
+    flex-direction: row;
+  }
+}
+.flex-col {
+  padding: 0 1rem;
+  flex: 1;
+}

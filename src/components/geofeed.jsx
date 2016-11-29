@@ -60,7 +60,10 @@ class GeoFeed extends React.Component {
       <div className="panel">
         <h2>Geofeed</h2>
         <p>Shows all tweets in a given area</p>
-        <Button className="button button--primary" onClick={this.followAll}>Follow All</Button>
+        <div className="button-group">
+          <button className="button button--primary" onClick={this.followAll}>Follow All</button>
+          <button className="button button--primary" onClick={this.loadFeed}>refresh</button>
+        </div>
         <ul className="feed">{feed}</ul>
       </div>
     )

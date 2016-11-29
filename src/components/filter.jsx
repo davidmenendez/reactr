@@ -29,10 +29,18 @@ class Filter extends React.Component {
     return (
       <div className="filter-controls">
         <form onSubmit={this.props.addFilter}>
-          <select onChange={this.props.setFilterCategory} value={this.props.filterCategory}>
-            {categories}
-          </select>
-          <input type="text" placeholder="filter" onChange={this.props.setCurrentFilter} value={this.props.currentFilter}/>
+          <div className="flex-row">
+            <div className="flex-col">
+              <label>Category</label>
+              <select onChange={this.props.setFilterCategory} value={this.props.filterCategory}>
+                {categories}
+              </select>
+            </div>
+            <div className="flex-col">
+              <label>Filter</label>
+              <input type="text" placeholder="filter" onChange={this.props.setCurrentFilter} value={this.props.currentFilter}/>
+            </div>
+          </div>
           <div className="button-group">
             <button className="button button--primary" onClick={this.props.addFilter}>add filter</button>
             <button className="button button--primary" onClick={this.props.removeAllFilters}>remove filters</button>
