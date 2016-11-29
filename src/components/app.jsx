@@ -37,7 +37,7 @@ class App extends React.Component {
           activePanel={this.state.activePanel}
           user={this.state.user}
           setPanel={this.setPanel} />
-        <Panel />
+        <Panel user={this.state.user} />
         <Loader />
       </div>
     )

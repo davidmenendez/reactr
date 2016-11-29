@@ -79,9 +79,9 @@ app.get('/api/user', function(req, res) {
     res.status(401).send('Unauthorized');
 });
 
-app.get('/api/followers/:cursor', function(req, res, next) {
+app.get('/api/followers/:screen_name/:cursor', function(req, res, next) {
   var params = {
-    screen_name: 'mrbig500',
+    screen_name: req.params.screen_name,
     count: 200,
     skip_status: true,
     cursor: req.params.cursor

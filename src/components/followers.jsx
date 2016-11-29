@@ -35,7 +35,7 @@ class Feed extends React.Component {
 
   loadFollowers() {
     const cursor = this.state.cursor;
-    ApiRequest(`followers/${cursor}`, 'get', (data) => {
+    ApiRequest(`followers/${this.props.user.screen_name}/${cursor}`, 'get', (data) => {
       this.setState({
         data: data.users,
         cursor: data.next_cursor,
