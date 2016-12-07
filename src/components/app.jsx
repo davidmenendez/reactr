@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import Followers from './followers';
 import Loader from './loader';
 import Geofeed from './geofeed';
+import FindFollowers from './findFollowers';
 import Sidebar from './sidebar';
 import ApiRequest from '../lib/request';
 
@@ -29,7 +30,8 @@ class App extends React.Component {
   render() {
     const Panel = {
       geofeed: Geofeed,
-      followers: Followers
+      followers: Followers,
+      findFollowers: FindFollowers
     }[this.state.activePanel];
     return (
       <div className="app-content">
