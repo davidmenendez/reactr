@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './button.jsx';
 import ApiRequest from '../lib/request';
+import _ from 'underscore';
 
 class GeoFeed extends React.Component {
   constructor(state) {
@@ -43,13 +44,19 @@ class GeoFeed extends React.Component {
   }
 
   render() {
-    const feed = this.state.statuses.filter((status, id) => {
+    const feedLocFiltered = this.state.statuses.filter((status, id) => {
       return status.user.location.toLowerCase().indexOf('austin') >= 0;
-    }).map((status, id) => {
+    });
+    const feedGrouped = _.map(_.groupBy(feedLocFiltered, (status) => {
+      return status.user.id_str;
+    }), (groupedStatus) => {
+      return groupedStatus[0];
+    });
+    const feed = feedGrouped.map((status, id) => {
       return (
         <li key={status.id}>
           <div>
-            <p><a href={"http://twitter.com/" + status.user.screen_name} target="_blank">#{id + 1} - {status.user.screen_name}</a></p>
+            <p><a href={"http://twitter.com/" + status.user.screen_name} target="_blank">{status.user.screen_name}</a></p>
             <p>Location - {status.user.location ? status.user.location : 'NA'}</p>
           </div>
           <Button className="button button--primary follow-button" onClick={() => {this.befriend(status.user.id_str)}}>follow</Button>
