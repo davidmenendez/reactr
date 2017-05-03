@@ -43,6 +43,11 @@ class GeoFeed extends React.Component {
     }, i * 1000);
   }
 
+  addClass(e) {
+    console.log(e, e.target);
+    e.target.classList.add('clicked');
+  }
+
   render() {
     const feedLocFiltered = this.state.statuses.filter((status, id) => {
       return status.user.location.toLowerCase().indexOf('austin') >= 0;
@@ -56,7 +61,7 @@ class GeoFeed extends React.Component {
       return (
         <li key={status.id}>
           <div>
-            <p><a href={"http://twitter.com/" + status.user.screen_name} target="_blank">{status.user.screen_name}</a></p>
+            <p><a href={"http://twitter.com/" + status.user.screen_name} target="_blank" onClick={this.addClass}>{status.user.screen_name}</a></p>
             <p>Location - {status.user.location ? status.user.location : 'NA'}</p>
           </div>
           <Button className="button button--primary follow-button" onClick={() => {this.befriend(status.user.id_str)}}>follow</Button>
