@@ -11,7 +11,7 @@ class Loader extends React.Component {
       <div className="loader">
         <div className="spinner" />
       </div>
-    )
+    );
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from './button.jsx';
-import Filter from './filter.jsx';
+import Button from './button';
+import Filter from './filter';
 import ApiRequest from '../lib/request';
 
 class Feed extends React.Component {
@@ -12,7 +12,7 @@ class Feed extends React.Component {
       page: 0,
       filters: [],
       currentFilter: '',
-      filterCategory: 'location'
+      filterCategory: 'location',
     };
     this.loadFollowers = this.loadFollowers.bind(this);
     this.filterFollowers = this.filterFollowers.bind(this);
@@ -39,18 +39,19 @@ class Feed extends React.Component {
       this.setState({
         data: data.users,
         cursor: data.next_cursor,
-        page: this.state.page + 1
+        page: this.state.page + 1,
       });
     });
   }
 
   addFilter(e) {
     e.preventDefault();
-    if (this.state.currentFilter)
+    if (this.state.currentFilter) {
       this.setState({ 
         filters: this.state.filters.concat(this.state.currentFilter),
-        currentFilter: ''
+        currentFilter: '',
       });
+    }
   }
 
   setCurrentFilter(e) {
@@ -69,8 +70,8 @@ class Feed extends React.Component {
 
   unfollowAll(e) {
     e.preventDefault();
-    let followButtons = document.getElementsByClassName('follow-button');
-    for (let i = 0; i < followButtons.length; i++) {
+    const followButtons = document.getElementsByClassName('follow-button');
+    for (let i = 0; i < followButtons.length; i += 1) {
       this.unfollowTimeout(followButtons[i], i);
     }
   }
@@ -82,9 +83,9 @@ class Feed extends React.Component {
   }
 
   filterFollowers(data) {
-    return data.filter((follower, id) => {
+    return data.filter((follower) => {
       const followerFilter = String(follower[this.state.filterCategory]).toLowerCase();
-      const results = this.state.filters.map((filter, id) => {
+      const results = this.state.filters.map((filter) => {
         return followerFilter.indexOf(filter) < 0
       });
       return results.indexOf(false) < 0
@@ -95,14 +96,14 @@ class Feed extends React.Component {
               <p><a href={"http://twitter.com/" + follower.screen_name} target="_blank">#{id + 1} - {follower.screen_name}</a></p>
               <p>location - {follower.location ? follower.location : 'NA'}</p>
             </div>
-            <Button className="button button--primary follow-button" onClick={() => {this.destroy(follower.id_str)}}>unfollow</Button>
+            <Button className="button button--primary follow-button" onClick={() => { this.destroy(follower.id_str); }}>unfollow</Button>
           </li>
-        )
+        );
     });
   }
 
   setFilterCategory(e) {
-    this.setState({ filterCategory: e.target.value })
+    this.setState({ filterCategory: e.target.value });
   }
 
   render() {
@@ -110,7 +111,7 @@ class Feed extends React.Component {
     const activeFilters = this.state.filters.map((filter, id) => {
       return (
         <li key={id} onClick={this.removeFilter}>{filter}</li>
-      )
+      );
     });
     return (
       <div className="panel">
@@ -119,15 +120,16 @@ class Feed extends React.Component {
         <div className="filters">
           <h3>Filters</h3>
           <Filter
-          data={this.state.data}
-          filters={this.state.filters}
-          filterCategory={this.state.filterCategory}
-          setFilterCategory={this.setFilterCategory}
-          addFilter={this.addFilter}
-          removeAllFilters={this.removeAllFilters}
-          setCurrentFilter={this.setCurrentFilter}
-          removeFilter={this.removeFilter}
-          currentFilter={this.state.currentFilter} />
+            data={this.state.data}
+            filters={this.state.filters}
+            filterCategory={this.state.filterCategory}
+            setFilterCategory={this.setFilterCategory}
+            addFilter={this.addFilter}
+            removeAllFilters={this.removeAllFilters}
+            setCurrentFilter={this.setCurrentFilter}
+            removeFilter={this.removeFilter}
+            currentFilter={this.state.currentFilter}
+          />
         </div>
         <div className="button-group">
           <button className="button button--primary" onClick={this.unfollowAll}>UnFollow All</button>
@@ -141,6 +143,7 @@ class Feed extends React.Component {
           :
           <p>no results :(</p>
         }
+        <button className="button button--primary" onClick={this.loadFollowers} disabled={this.state.cursor === 0}>next page</button>
       </div>
     )
   }

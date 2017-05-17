@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import Followers from './followers';
 import Loader from './loader';
 import Geofeed from './geofeed';
@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       activePanel: 'geofeed',
-      user: ''
+      user: '',
     };
     this.setPanel = this.setPanel.bind(this);
   }
@@ -31,19 +31,20 @@ class App extends React.Component {
     const Panel = {
       geofeed: Geofeed,
       followers: Followers,
-      findFollowers: FindFollowers
+      findFollowers: FindFollowers,
     }[this.state.activePanel];
     return (
       <div className="app-content">
-        <Sidebar 
+        <Sidebar
           activePanel={this.state.activePanel}
           user={this.state.user}
-          setPanel={this.setPanel} />
+          setPanel={this.setPanel}
+        />
         <Panel user={this.state.user} />
         <Loader />
       </div>
-    )
+    );
   }
 }
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));

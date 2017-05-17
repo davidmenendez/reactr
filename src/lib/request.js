@@ -1,28 +1,31 @@
 let reqCounter = 0;
 
 export default function ApiRequest(path, action, callback) {
-  var loader = document.querySelector('.loader');
+  const loader = document.querySelector('.loader');
   loader.classList.add('loader--active');
-  reqCounter++;
+  reqCounter += 1;
 
-  let req = new XMLHttpRequest();
-  let fullPath = '/api/' + path;
-  action = action.toUpperCase();
+  const req = new XMLHttpRequest();
+  const fullPath = `/api/${path}`;
 
-  req.open(action, fullPath, true);
+  req.open(action.toUpperCase(), fullPath, true);
 
-  if(action == 'POST')
+  if (action.toUpperCase() === 'POST') {
     req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  }
 
   req.onload = function() {
-    if(req.readyState === 4) {
-      reqCounter--;
-      if (reqCounter === 0)
+    if (req.readyState === 4) {
+      reqCounter -= 1;
+      if (reqCounter === 0) {
         loader.classList.remove('loader--active');
-      if (req.status !== 200)
-        console.error(req.statusText)
-      if (callback)
+      }
+      if (req.status !== 200) {
+        console.error(req.statusText);
+      }
+      if (callback) {
         callback(JSON.parse(this.response));
+      }
     }
   };
 

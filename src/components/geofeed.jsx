@@ -1,13 +1,13 @@
 import React from 'react';
-import Button from './button.jsx';
-import ApiRequest from '../lib/request';
 import _ from 'underscore';
+import Button from './button';
+import ApiRequest from '../lib/request';
 
 class GeoFeed extends React.Component {
   constructor(state) {
     super(state);
     this.state = {
-      statuses: []
+      statuses: [],
     };
     this.loadFeed = this.loadFeed.bind(this);
     this.befriend = this.befriend.bind(this);
@@ -32,7 +32,7 @@ class GeoFeed extends React.Component {
   followAll(e) {
     e.preventDefault();
     let followButtons = document.getElementsByClassName('follow-button');
-    for (let i = 0; i < followButtons.length; i++) {
+    for (let i = 0; i < followButtons.length; i += 1) {
       this.followTimeout(followButtons[i], i);
     }
   }
@@ -44,41 +44,49 @@ class GeoFeed extends React.Component {
   }
 
   addClass(e) {
-    console.log(e, e.target);
     e.target.classList.add('clicked');
   }
 
   render() {
-    const feedLocFiltered = this.state.statuses.filter((status, id) => {
-      return status.user.location.toLowerCase().indexOf('austin') >= 0;
-    });
-    const feedGrouped = _.map(_.groupBy(feedLocFiltered, (status) => {
-      return status.user.id_str;
-    }), (groupedStatus) => {
-      return groupedStatus[0];
-    });
-    const feed = feedGrouped.map((status, id) => {
-      return (
+    const feedLocFiltered = this.state.statuses.filter(status => status.user.location.toLowerCase().indexOf('austin') >= 0);
+    const feedGrouped = _.map(_.groupBy(feedLocFiltered, status => status.user.id_str), groupedStatus => groupedStatus[0]);
+    const feed = feedGrouped.map(status =>
+      (
         <li key={status.id}>
           <div>
-            <p><a href={"http://twitter.com/" + status.user.screen_name} target="_blank" onClick={this.addClass}>{status.user.screen_name}</a></p>
+            <p>
+              <a
+                href={`http://twitter.com/${status.user.screen_name}`}
+                target="_blank"
+                onClick={this.addClass}
+              >{status.user.screen_name}</a>
+            </p>
             <p>Location - {status.user.location ? status.user.location : 'NA'}</p>
           </div>
-          <Button className="button button--primary follow-button" onClick={() => {this.befriend(status.user.id_str)}}>follow</Button>
+          <Button
+            className="button button--primary follow-button"
+            onClick={() => { this.befriend(status.user.id_str); }}
+          >follow</Button>
         </li>
-      )
-    });
+      ),
+    );
     return (
       <div className="panel">
         <h2>Geofeed</h2>
         <p>Shows all tweets in a given area</p>
         <div className="button-group">
-          <button className="button button--primary" onClick={this.followAll}>Follow All</button>
-          <button className="button button--primary" onClick={this.loadFeed}>refresh</button>
+          <button
+            className="button button--primary"
+            onClick={this.followAll}
+          >Follow All</button>
+          <button
+            className="button button--primary"
+            onClick={this.loadFeed}
+          >refresh</button>
         </div>
         <ul className="feed">{feed}</ul>
       </div>
-    )
+    );
   }
 }
 
